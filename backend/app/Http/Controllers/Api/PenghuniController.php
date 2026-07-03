@@ -14,7 +14,7 @@ class PenghuniController extends Controller
      */
     public function index()
     {
-        $penghunis = Penghuni::all();
+        $penghunis = Penghuni::with(['rumahAktif'])->get();
         return response()->json($penghunis);
     }
 
@@ -49,7 +49,7 @@ class PenghuniController extends Controller
      */
     public function show(string $id)
     {
-        $penghuni = Penghuni::with('rumahs')->findOrFail($id);
+        $penghuni = Penghuni::with(['rumahs', 'rumahAktif'])->findOrFail($id);
         
         return response()->json([
             'message' => 'Detail penghuni berhasil diambil',
@@ -63,7 +63,7 @@ class PenghuniController extends Controller
     public function update(Request $request, string $id)
     {
         $penghuni = Penghuni::findOrFail($id);
-
+        
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
@@ -79,11 +79,11 @@ class PenghuniController extends Controller
             $path = $request->file('foto_ktp')->store('ktp_images', 'public');
             $validated['foto_ktp'] = $path;
         } else {
-            unset($validated['foto_ktp']); 
+            unset($validated['foto_ktp']);
         }
 
         $penghuni->update($validated);
-
+        
         return response()->json([
             'message' => 'Data penghuni berhasil diupdate',
             'data' => $penghuni
@@ -96,13 +96,7 @@ class PenghuniController extends Controller
     public function destroy(string $id)
     {
         $penghuni = Penghuni::findOrFail($id);
-
-        if ($penghuni->foto_ktp && Storage::disk('public')->exists($penghuni->foto_ktp)) {
-            Storage::disk('public')->delete($penghuni->foto_ktp);
-        }
-
         $penghuni->delete();
-
-        return response()->json(['message' => 'Data penghuni berhasil dihapus']);
+        return response()->json(['message' => 'Data penghuni dinonaktifkan']);
     }
 }
