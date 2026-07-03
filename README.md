@@ -93,6 +93,13 @@ Backend API: http://localhost:8000/api
 
 ## ✨ Fitur-Fitur Aplikasi
 
+### 0. Login
+
+- email: rt@gmail.com
+- password: password
+
+<img width="1904" height="1039" alt="image" src="https://github.com/user-attachments/assets/63615b24-dc22-4db4-a7d9-30e9f874ec44" />
+
 ### 1. 📊 Dashboard
 
 Halaman utama yang menampilkan ringkasan data dan statistik RT/RW
@@ -105,7 +112,7 @@ Halaman utama yang menampilkan ringkasan data dan statistik RT/RW
 - Tagihan Pending (tagihan yang belum dibayar)
 - Aktivitas Terkini
 
-[Screenshot: Dashboard]
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/c7934581-6097-4df2-8c5a-b520968f2fc1" />
 
 ---
 
@@ -128,9 +135,11 @@ Mengelola data properti/unit rumah dengan status kepemilikan
   - Riwayat Penghuni: Nama, Tanggal Masuk, Tanggal Keluar
 - **Hapus Rumah** - Menghapus unit dengan konfirmasi
 
-[Screenshot: Master Rumah - Daftar]
-[Screenshot: Master Rumah - Add/Edit Modal]
-[Screenshot: Master Rumah - Detail Modal]
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/920cd2d0-cf61-4a92-8318-242d05b2d9a1" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/163b81e1-558d-4922-a449-88eda4468d3f" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/745c0360-0be7-45e1-9f97-d57ce9b456f9" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/1d136d45-c81d-4431-992b-724730d33c66" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/f7b91cc8-5afe-4bc9-a5d0-ddbe230a095f" />
 
 ---
 
@@ -157,10 +166,11 @@ Mengelola data penghuni/warga dengan penugasan ke rumah
   - Efek: Status rumah otomatis berubah menjadi "Dihuni"
 - **Hapus/Nonaktifkan Penghuni** - Menghapus/menonaktifkan warga
 
-[Screenshot: Master Penghuni - Daftar]
-[Screenshot: Master Penghuni - Add Modal]
-[Screenshot: Master Penghuni - Assign Modal]
-[Screenshot: Master Penghuni - Detail Modal]
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/f2357def-1bd0-42f5-bf1d-2bb11c82bced" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/320bfa28-007c-475d-a768-4378c74391da" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/db66ee36-52ee-4f6f-99c0-a6f1fce3a7ee" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/4c13c9a1-7bad-49fc-aaab-b996fa376232" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/3a87fef8-190c-4ed9-ae64-1c8dd92f51ef" />
 
 ---
 
@@ -180,9 +190,10 @@ Mengelola tagihan iuran bulanan/tahunan penghuni
   - Input: Status Bayar (Belum Bayar/Lunas)
 - **Hapus Tagihan** - Menghapus tagihan yang sudah dibuat
 
-[Screenshot: Tagihan - Daftar]
-[Screenshot: Tagihan - Add Modal]
-[Screenshot: Tagihan - Bayar/Update Status Modal]
+<img width="1721" height="1172" alt="image" src="https://github.com/user-attachments/assets/1f5a5e51-484e-4e42-9782-545000decc57" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/ebf931cb-b44d-4356-a540-2ab7334349d5" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/a41c91bd-58ae-4835-b520-e96c34299c1f" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/8441d57a-81a5-4d8e-8ecb-40009f84c038" />
 
 ---
 
@@ -201,8 +212,10 @@ Mencatat biaya operasional RT/RW
   - Input: Tanggal, Kategori, Deskripsi, Jumlah
 - **Hapus Pengeluaran** - Menghapus pencatatan pengeluaran
 
-[Screenshot: Pengeluaran - Daftar]
-[Screenshot: Pengeluaran - Add/Edit Modal]
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/0b0c9c08-c781-4754-8658-b0f3a0f223a9" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/11509b36-9d34-4eb8-8d88-07fa09d15e94" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/20d77b86-2695-46de-9c6c-bcdcf6f4d5c8" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/78545e7d-77f8-4034-819f-e2fba664178e" />
 
 ---
 
@@ -221,8 +234,8 @@ Dashboard keuangan dengan summary pemasukan dan pengeluaran per bulan
   - Pengeluaran: Daftar pengeluaran operasional untuk periode tersebut
   - Kolom: Keterangan, Nominal, Tanggal
 
-[Screenshot: Laporan - Ringkasan Tahunan]
-[Screenshot: Laporan - Detail Modal (Pemasukan & Pengeluaran)]
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/e3784093-6861-4259-ba4a-0308bcb24e15" />
+<img width="1721" height="1039" alt="image" src="https://github.com/user-attachments/assets/e5e959fa-27db-49b1-8134-731b652bb913" />
 
 ---
 
@@ -281,7 +294,9 @@ testing_beon/
 ---
 
 ## 🏗️ Entity Relationship Diagram (ERD)
-[Screenshot: Tagihan - Bayar/Update Status Modal]
+
+<img width="5364" height="3964" alt="image" src="https://github.com/user-attachments/assets/b5fa1d87-a8f8-4657-bb74-213089b0b5d2" />
+<img width="600" height="536" alt="image" src="https://github.com/user-attachments/assets/cfa3e458-3010-4ac8-9da0-53beee1b8216" />
 
 ## 🧪 Testing
 
