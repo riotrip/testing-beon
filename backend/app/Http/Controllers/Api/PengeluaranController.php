@@ -14,7 +14,10 @@ class PengeluaranController extends Controller
     public function index()
     {
         $pengeluarans = Pengeluaran::orderBy('date', 'desc')->get();
-        return response()->json($pengeluarans);
+        return response()->json([
+            'message' => 'Daftar pengeluaran berhasil diambil',
+            'data' => $pengeluarans
+        ]);
     }
 
     /**

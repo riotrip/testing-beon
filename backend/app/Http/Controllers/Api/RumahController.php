@@ -14,7 +14,10 @@ class RumahController extends Controller
     public function index()
     {
         $rumahs = Rumah::with('penghunis')->get();
-        return response()->json($rumahs);
+        return response()->json([
+            'message' => 'Daftar rumah berhasil diambil',
+            'data' => $rumahs
+        ]);
     }
 
     /**

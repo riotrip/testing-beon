@@ -14,7 +14,10 @@ class TagihanController extends Controller
     public function index()
     {
         $tagihans = Tagihan::with('rumah')->get();
-        return response()->json($tagihans);
+        return response()->json([
+            'message' => 'Daftar tagihan berhasil diambil',
+            'data' => $tagihans
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class TagihanController extends Controller
     {
         $validated = $request->validate([
             'rumah_id' => 'required|exists:rumahs,id',
-            'type' => 'required|in:Satpam,Kebersihan',
+            'type' => 'required|string|max:255',
             'amount' => 'required|integer',
             'bulan_mulai' => 'required|integer|min:1|max:12',
             'tahun_mulai' => 'required|integer',

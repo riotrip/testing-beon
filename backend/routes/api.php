@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\RumahController;
 use App\Http\Controllers\Api\PenghuniController;
 use App\Http\Controllers\Api\TagihanController;
@@ -13,6 +14,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     
     Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::get('dashboard', [DashboardController::class, 'index']);
 
     Route::apiResource('rumah', RumahController::class);
     Route::apiResource('penghuni', PenghuniController::class);

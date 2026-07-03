@@ -15,7 +15,10 @@ class PenghuniController extends Controller
     public function index()
     {
         $penghunis = Penghuni::with(['rumahAktif'])->get();
-        return response()->json($penghunis);
+        return response()->json([
+            'message' => 'Daftar penghuni berhasil diambil',
+            'data' => $penghunis
+        ]);
     }
 
     /**
