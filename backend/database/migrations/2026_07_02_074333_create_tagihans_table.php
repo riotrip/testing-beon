@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tagihans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rumah_id')->constrained('rumahs')->onDelete('cascade');
-            $table->enum('type', ['Satpam', 'Kebersihan']);
+            $table->string('type', 50);
             $table->integer('amount');
             $table->integer('bulan_tagihan');
             $table->integer('tahun_tagihan');
