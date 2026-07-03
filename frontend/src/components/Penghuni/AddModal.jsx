@@ -214,7 +214,7 @@ export default function AddModal({ isOpen, onClose, onSuccess }) {
 
           <div className="border-t border-slate-200 my-5" />
           <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-            Assign ke Rumah (Opsional)
+            Assign ke Rumah
           </p>
 
           <div className="mb-4">
@@ -225,9 +225,12 @@ export default function AddModal({ isOpen, onClose, onSuccess }) {
               name="rumah_id"
               value={formData.rumah_id}
               onChange={handleChange}
+              required
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800"
             >
-              <option value="">-- Tidak assign sekarang --</option>
+              <option value="" disabled>
+                -- Assign Rumah --
+              </option>
               {rumahList.map((r) => (
                 <option key={r.id} value={r.id}>
                   Blok {r.no_rumah} — {r.address}

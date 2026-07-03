@@ -8,6 +8,7 @@ export default function AddModal({ isOpen, onClose, onSubmit }) {
     rumah_id: "",
     type: "Satpam",
     amount: 100000,
+    custom_type: "",
     bulan_mulai: new Date().getMonth() + 1,
     tahun_mulai: new Date().getFullYear(),
     jumlah_bulan: 1,
@@ -36,18 +37,75 @@ export default function AddModal({ isOpen, onClose, onSubmit }) {
     }
   };
 
+  const handleTypeChange = (selectedType) => {
+    if (selectedType === "Satpam") {
+      setFormData((prev) => ({
+        ...prev,
+        type: selectedType,
+        amount: 100000,
+        custom_type: "",
+      }));
+    } else if (selectedType === "Kebersihan") {
+      setFormData((prev) => ({
+        ...prev,
+        type: selectedType,
+        amount: 15000,
+        custom_type: "",
+      }));
+    } else if (selectedType === "Lainnya") {
+      setFormData((prev) => ({
+        ...prev,
+        type: selectedType,
+        amount: 0,
+        custom_type: "",
+      }));
+    }
+  };
+
   if (!isOpen) return null;
+
+  // Hitung total amount
+  const totalAmount = Number(formData.amount) * Number(formData.jumlah_bulan);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit({
-      ...formData,
+
+    const submitData = {
       rumah_id: Number(formData.rumah_id),
-      amount: Number(formData.amount),
+      amount: totalAmount,
       bulan_mulai: Number(formData.bulan_mulai),
       tahun_mulai: Number(formData.tahun_mulai),
       jumlah_bulan: Number(formData.jumlah_bulan),
-    });
+      payment_status: formData.payment_status,
+      type:
+        formData.type === "Lainnya" && formData.custom_type
+          ? `Lainnya (${formData.custom_type})`
+          : formData.type,
+    };
+
+    onSubmit(submitData);
+  };
+
+  const isFixedAmount =
+    formData.type === "Satpam" || formData.type === "Kebersihan";
+
+  // Format bulan ke nama
+  const getNamaBulan = (bulan) => {
+    const namaBulan = [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ];
+    return namaBulan[bulan - 1];
   };
 
   return (
@@ -127,37 +185,67 @@ export default function AddModal({ isOpen, onClose, onSubmit }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            <div>
+          <div className="mb-4">
+            <label className="block text-sm font-bold text-slate-700 mb-2">
+              Jenis Iuran
+            </label>
+            <select
+              value={formData.type}
+              onChange={(e) => handleTypeChange(e.target.value)}
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 bg-white"
+            >
+              <option value="Satpam">Satpam (Rp 100.000/bln)</option>
+              <option value="Kebersihan">Kebersihan (Rp 15.000/bln)</option>
+              <option value="Lainnya">Lainnya</option>
+            </select>
+          </div>
+
+          {formData.type === "Lainnya" && (
+            <div className="mb-4">
               <label className="block text-sm font-bold text-slate-700 mb-2">
-                Jenis Iuran
-              </label>
-              <select
-                value={formData.type}
-                onChange={(e) =>
-                  setFormData({ ...formData, type: e.target.value })
-                }
-                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 bg-white"
-              >
-                <option value="Satpam">Satpam</option>
-                <option value="Kebersihan">Kebersihan</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-slate-700 mb-2">
-                Nominal Per Bulan
+                Nama Iuran Lainnya
               </label>
               <input
-                type="number"
+                type="text"
                 required
-                min="0"
-                value={formData.amount}
+                placeholder="Masukkan nama iuran..."
+                value={formData.custom_type}
                 onChange={(e) =>
-                  setFormData({ ...formData, amount: e.target.value })
+                  setFormData({ ...formData, custom_type: e.target.value })
                 }
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800"
               />
             </div>
+          )}
+
+          <div className="mb-4">
+            <label className="block text-sm font-bold text-slate-700 mb-2">
+              Nominal Per Bulan
+            </label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                Rp
+              </span>
+              <input
+                type="number"
+                required
+                min="0"
+                disabled={isFixedAmount}
+                value={formData.amount}
+                onChange={(e) =>
+                  setFormData({ ...formData, amount: e.target.value })
+                }
+                className={`w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-800 ${
+                  isFixedAmount ? "bg-slate-100 cursor-not-allowed" : "bg-white"
+                }`}
+              />
+            </div>
+            {isFixedAmount && (
+              <p className="text-xs text-slate-500 mt-1">
+                Nominal iuran {formData.type.toLowerCase()} sudah ditentukan
+                secara otomatis
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-4">
@@ -174,7 +262,7 @@ export default function AddModal({ isOpen, onClose, onSubmit }) {
               >
                 {Array.from({ length: 12 }, (_, i) => i + 1).map((b) => (
                   <option key={b} value={b}>
-                    Bulan {b}
+                    {getNamaBulan(b)}
                   </option>
                 ))}
               </select>
@@ -226,6 +314,58 @@ export default function AddModal({ isOpen, onClose, onSubmit }) {
                 <option value="Belum Lunas">Belum Lunas</option>
                 <option value="Lunas">Lunas</option>
               </select>
+            </div>
+          </div>
+
+          <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm font-semibold text-slate-700">
+                Ringkasan Tagihan
+              </span>
+              <span className="text-xs font-medium text-blue-600 bg-blue-100 px-2 py-1 rounded-full">
+                {formData.jumlah_bulan} Bulan
+              </span>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-slate-600">Jenis Iuran:</span>
+                <span className="font-semibold text-slate-800">
+                  {formData.type === "Lainnya" && formData.custom_type
+                    ? `Lainnya (${formData.custom_type})`
+                    : formData.type}
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-slate-600">Nominal/Bulan:</span>
+                <span className="font-semibold text-slate-800">
+                  Rp {Number(formData.amount).toLocaleString("id-ID")}
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span className="text-slate-600">Periode:</span>
+                <span className="font-semibold text-slate-800">
+                  {getNamaBulan(formData.bulan_mulai)} {formData.tahun_mulai}
+                </span>
+              </div>
+
+              <div className="border-t border-blue-200 pt-2 mt-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-bold text-slate-700">
+                    Total Tagihan:
+                  </span>
+                  <span className="text-lg font-bold text-blue-700">
+                    Rp {totalAmount.toLocaleString("id-ID")}
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-xs text-slate-500 text-right">
+                {formData.jumlah_bulan} bulan × Rp{" "}
+                {Number(formData.amount).toLocaleString("id-ID")}
+              </div>
             </div>
           </div>
 
